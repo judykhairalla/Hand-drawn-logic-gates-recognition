@@ -6,7 +6,7 @@ from segmentation import *
 ###########################
 #         LOADING         #
 ###########################
-img=cv2.imread("sample images/image4.jpg",cv2.IMREAD_COLOR)
+img=cv2.imread("sample images/image3.jpg",cv2.IMREAD_COLOR)
 original = img.copy()
 # cv2.imshow("Original", img)
 

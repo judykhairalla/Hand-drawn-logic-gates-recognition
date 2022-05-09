@@ -53,8 +53,6 @@ def dilate(img):
 def enhance(img):
     denoisedImage = denoising(img)
     binarizedImage = binarize(denoisedImage)
-    skewCorrectedImage = skewCorrection(binarizedImage)
-    dilatedImage = dilate(skewCorrectedImage)
+    # skewCorrectedImage = skewCorrection(binarizedImage)
+    dilatedImage = dilate(binarizedImage)
     return dilatedImage
-
-cv2.waitKey(0)
