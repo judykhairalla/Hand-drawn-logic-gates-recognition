@@ -46,8 +46,15 @@ def skewCorrection(img):
 #        DILATION         #
 ###########################
 def dilate(img):
-    kernel = np.ones((3,3), np.uint8)
-    return cv2.dilate(img, kernel, iterations = 1)
+    kernel = np.ones((5,5), np.uint8)
+    return cv2.dilate(img, kernel, iterations = 2)
+
+###########################
+#        EROSION         #
+###########################
+def erode(img):
+    kernel = np.ones((5,5), np.uint8)
+    return cv2.erode(img, kernel, iterations = 2)
 
 
 def enhance(img):
@@ -55,4 +62,5 @@ def enhance(img):
     binarizedImage = binarize(denoisedImage)
     # skewCorrectedImage = skewCorrection(binarizedImage)
     dilatedImage = dilate(binarizedImage)
-    return dilatedImage
+    erodedImage = erode(dilatedImage)
+    return erodedImage
