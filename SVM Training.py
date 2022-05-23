@@ -14,6 +14,7 @@ from sklearn.metrics import classification_report,accuracy_score,confusion_matri
 #     Loading Dataset     #
 #   &    Dataframe        #
 ###########################
+'''
 Categories=['AND','OR','NOT']
 
 flat_data_arr=[]
@@ -34,11 +35,17 @@ for i in Categories:
 flat_data=np.array(flat_data_arr)
 target=np.array(target_arr)
 df=pd.DataFrame(flat_data) #dataframe
-df.to_csv('img_data.csv')
 df['Target']=target
-x=df.iloc[:,:-1] #input data 
-y=df.iloc[:,-1]
 
+df.to_csv('img_data.csv')
+'''
+df = pd.read_csv('CSVFiles/SIFT Features.csv')
+x_train=df.iloc[:,1:-1] #input data 
+y_train=df.iloc[:,-1]
+
+df = pd.read_csv('CSVFiles/SIFT Features Testing.csv')
+x_test=df.iloc[:,1:-1] #input data 
+y_test=df.iloc[:,-1]
 
 ###########################
 #      Model Creation     #
@@ -51,9 +58,6 @@ model=GridSearchCV(svc,param_grid)
 ###########################
 #      Model Training     #
 ###########################
-x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.20,random_state=77,stratify=y)
-print('Splitted Successfully')
-
 model.fit(x_train,y_train)
 print('The Model is trained with the given images')
 pickle.dump(model,open('img_model.p','wb'))

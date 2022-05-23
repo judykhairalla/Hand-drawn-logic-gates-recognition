@@ -31,8 +31,8 @@ def drawBoundingBoxes(origImg, contours):
             ROI_number += 1
     return origImg
 
-def segment(origImg, ehancedImg):
-    removedLinesImg = removeLines(ehancedImg)
+def segment(origImg, enhancedImg):
+    removedLinesImg = removeLines(enhancedImg)
     contours = contourDetection(removedLinesImg)
     boundingBoxesImg = drawBoundingBoxes(origImg, contours)
     return boundingBoxesImg

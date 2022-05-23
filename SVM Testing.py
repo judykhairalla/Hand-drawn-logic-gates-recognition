@@ -3,23 +3,41 @@ from skimage.transform import resize
 from skimage.io import imread
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn import svm
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report,accuracy_score,confusion_matrix
 import cv2
+from enhancement import * 
 
-Categories=['AND','OR','NOT']
+###########################
+#      Model Loading &    #
+#      Image features     #
+###########################
 model=pickle.load(open('img_model.p','rb'))
 
-img_path = "ROI_2.png"
+# Read Image
+img_path = "ROI_0.png"
+image = imread(img_path)
+imgResized = cv2.resize(image, (540, 540))
 
-img=imread(img_path)
+# Enhance image
+enhancedImg = enhance(imgResized)
 
-img_resize=resize(img,(150,150,3))
-img_data=[img_resize.flatten()]
+# Extract Features
+sift = cv2.SIFT_create()
+kp, des = sift.detectAndCompute(enhancedImg, None)
+des_resized=resize(des,(50,50,1))
+img_data=[des_resized.flatten()]
+
+# Predict
 probability=model.predict_proba(img_data)
 
+
+
+###########################
+#         RESULTS         #
+###########################
+Categories=['AND','OR','NOT']
 for ind,val in enumerate(Categories):
   print(f'{val} = {probability[0][ind]*100}%')
 print("The predicted image is : "+Categories[model.predict(img_data)[0]])
