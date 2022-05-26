@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-from PIL import Image as im
 from scipy import ndimage
 
 ###########################
@@ -60,7 +59,7 @@ def erode(img):
 def enhance(img):
     denoisedImage = denoising(img)
     binarizedImage = binarize(denoisedImage)
-    skewCorrectedImage = skewCorrection(binarizedImage)
-    dilatedImage = dilate(skewCorrectedImage)
+    #skewCorrectedImage = skewCorrection(binarizedImage)
+    dilatedImage = dilate(binarizedImage)
     erodedImage = erode(dilatedImage)
     return erodedImage

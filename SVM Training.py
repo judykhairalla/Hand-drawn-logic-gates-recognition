@@ -39,11 +39,11 @@ df['Target']=target
 
 df.to_csv('img_data.csv')
 '''
-df = pd.read_csv('CSVFiles/SIFT Features.csv')
+df = pd.read_csv('CSVFiles/SIFT Features Training150.csv')
 x_train=df.iloc[:,1:-1] #input data 
 y_train=df.iloc[:,-1]
 
-df = pd.read_csv('CSVFiles/SIFT Features Testing.csv')
+df = pd.read_csv('CSVFiles/SIFT Features Testing150.csv')
 x_test=df.iloc[:,1:-1] #input data 
 y_test=df.iloc[:,-1]
 
@@ -60,7 +60,7 @@ model=GridSearchCV(svc,param_grid)
 ###########################
 model.fit(x_train,y_train)
 print('The Model is trained with the given images')
-pickle.dump(model,open('img_model.p','wb'))
+pickle.dump(model,open('model80.p','wb'))
 print("Pickle is dumped successfully")
 
 ###########################

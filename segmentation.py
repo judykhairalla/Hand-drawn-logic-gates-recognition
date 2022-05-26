@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
+import os
 
+from Predict import Predict
 # Find lines
 def removeLines(img):
     minLineLength = 10
@@ -21,13 +23,17 @@ def contourDetection(img):
 # Contour filtering and ROI extraction
 def drawBoundingBoxes(origImg, contours):
     ROI_number = 0
+    path = 'ROIs'
     for c in contours:
         area = cv2.contourArea(c)
         if area > 3000:
             x,y,w,h = cv2.boundingRect(c)
             ROI = origImg[y:y+h,x:x+w]
-            cv2.imwrite('ROI_{}.png'.format(ROI_number), ROI)
+            imagePath = os.path.join(path, 'ROI_{}.png'.format(ROI_number))
+            cv2.imwrite(imagePath, ROI)
+            label = Predict(imagePath)
             cv2.rectangle(origImg, (x, y), (x+w, y+h), (36, 255, 12), 8)
+            cv2.putText(img=origImg, text=label, org=(x, y+h+60), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=2, color=(255, 255, 255),thickness=4)
             ROI_number += 1
     return origImg
 
