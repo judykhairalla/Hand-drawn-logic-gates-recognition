@@ -39,18 +39,21 @@ df['Target']=target
 
 df.to_csv('img_data.csv')
 '''
-df = pd.read_csv('CSVFiles/SIFT Features Training150.csv')
+df = pd.read_csv('CSVFiles/SIFT Features Training128.csv')
 x_train=df.iloc[:,1:-1] #input data 
 y_train=df.iloc[:,-1]
 
-df = pd.read_csv('CSVFiles/SIFT Features Testing150.csv')
+
+
+df = pd.read_csv('CSVFiles/SIFT Features Testing128.csv')
 x_test=df.iloc[:,1:-1] #input data 
 y_test=df.iloc[:,-1]
+
 
 ###########################
 #      Model Creation     #
 ###########################
-param_grid={'C':[0.1,1,10,100],'gamma':[0.0001,0.001,0.1,1],'kernel':['linear','rbf','poly']}
+param_grid={'C':[0.1,1,10],'gamma':[0.001,0.1,1],'kernel':['rbf','poly']}
 svc=svm.SVC(probability=True)
 model=GridSearchCV(svc,param_grid)
 
@@ -60,8 +63,9 @@ model=GridSearchCV(svc,param_grid)
 ###########################
 model.fit(x_train,y_train)
 print('The Model is trained with the given images')
-pickle.dump(model,open('model80.p','wb'))
+pickle.dump(model,open('model128.p','wb'))
 print("Pickle is dumped successfully")
+
 
 ###########################
 #      Model Testing      #

@@ -24,7 +24,7 @@ for i in Categories:
         image = cv2.imread(path + '/' + imgName)
         sift = cv2.SIFT_create()
         kp, des = sift.detectAndCompute(image, None)
-        des_resized=resize(des,(80,80,1))
+        des_resized=resize(des,(128,128,1))
         flat_data_arr.append(des_resized.flatten())
         target_arr.append(Categories.index(i))
     print(f'loaded category:{i} successfully')
@@ -33,7 +33,7 @@ flat_data=np.array(flat_data_arr)
 target=np.array(target_arr)
 df=pd.DataFrame(flat_data) #dataframe
 df['Target']=target
-df.to_csv('SIFT Features Training.csv')
+df.to_csv('SIFT Features Training128.csv')
 
 
 ################################

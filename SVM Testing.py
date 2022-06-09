@@ -11,7 +11,7 @@ from enhancement import *
 model=pickle.load(open('models/model80.p','rb'))
 
 # Read Image
-img_path = "ROIs/ROI_1.png"
+img_path = "ROIs/ROI_3.png"
 image = imread(img_path)
 
 # Enhance image
