@@ -2,7 +2,7 @@ import cv2
 from enhancement import * 
 from segmentation import *
 
-image = cv2.imread("samples/circuit3.jpg") 
+image = cv2.imread("samples/circuit2.jpg") 
 enhancedImage = enhance(image)
 segmented = segment(image, enhancedImage)
 
