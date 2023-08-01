@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import os
 
-from predict import Predict
+from predict import predict
 # Find lines
 def removeLines(img):
     minLineLength = 10
@@ -36,7 +36,7 @@ def drawBoundingBoxes(origImg, contours):
             ROI = origImg[y:y+h,x:x+w]
             imagePath = os.path.join(path, 'ROI_{}.png'.format(ROI_number))
             cv2.imwrite(imagePath, ROI)
-            label = Predict(imagePath)
+            label = predict(imagePath)
             cv2.rectangle(origImg, (x, y), (x+w, y+h), (36, 255, 12), 8)
             cv2.putText(img=origImg, text=label, org=(x, y+h+60), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=2, color=(255, 255, 255),thickness=4)
             ROI_number += 1

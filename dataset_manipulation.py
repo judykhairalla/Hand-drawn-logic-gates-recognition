@@ -52,5 +52,3 @@ df.to_csv('SIFT Features Training128.csv')
 #         enhancedImg = enhance(imgResized)
 #         cv2.imwrite(i + str(count)+'.jpg', enhancedImg)
 #         count+=1
-
-

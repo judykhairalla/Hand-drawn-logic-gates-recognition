@@ -4,7 +4,7 @@ from skimage.transform import resize
 from skimage.io import imread
 from enhancement import * 
 
-def Predict(imgPath):
+def predict(imgPath):
     ###########################
     #      Model Loading &    #
     #      Image features     #
