@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import os
 
-from Predict import Predict
+from predict import Predict
 # Find lines
 def removeLines(img):
     minLineLength = 10
@@ -24,6 +24,11 @@ def contourDetection(img):
 def drawBoundingBoxes(origImg, contours):
     ROI_number = 0
     path = 'ROIs'
+    
+    isExist = os.path.exists(path)
+    if not isExist:
+        os.makedirs(path)
+    
     for c in contours:
         area = cv2.contourArea(c)
         if area > 3000:
